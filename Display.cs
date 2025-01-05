@@ -23,7 +23,10 @@ namespace Lab_3_Database
 
                 if (Enum.TryParse(input, out MenuOption option))
                 {
-                    HandleMenuOption(option);
+                    if (!HandleMenuOption(option))
+                    {
+                        break;
+                    }
                 }
                 else
                 {
@@ -31,7 +34,7 @@ namespace Lab_3_Database
                 }
             }
         }
-        
+
         public enum MenuOption
         {
             DisplayAllStaff =1,
@@ -57,7 +60,7 @@ namespace Lab_3_Database
             Console.WriteLine("8 - Exit");
         }
 
-        private static void HandleMenuOption (MenuOption option)
+        private static bool HandleMenuOption (MenuOption option)
         {
             switch (option)
             {
@@ -83,11 +86,12 @@ namespace Lab_3_Database
                     StaffManager.AddStaff();
                     break;
                 case MenuOption.Exit:
-                    return;
+                    return false;
                 default:
                     Console.WriteLine("Invalid choice");
                     break;
             }
+            return true;
             Console.WriteLine();
         }
     }
